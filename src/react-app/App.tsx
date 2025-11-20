@@ -1,18 +1,45 @@
 // src/App.tsx
 
-import { useState } from "react";
+import React, { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
 import honoLogo from "./assets/hono.svg";
+import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("unknown");
+/**
+ * App 主组件
+ * 包含计数器功能和API调用示例，已适配GitHub Pages环境
+ */
+const App: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
+  const [name, setName] = useState<string>("unknown");
+  
+  /**
+   * 调用API函数
+   * 在GitHub Pages环境中会优雅降级为使用模拟数据
+   */
+  const callApi = async (): Promise<void> => {
+    try {
+      // 尝试调用API - 在GitHub Pages环境下这将失败
+      const response = await fetch("./api/"); // 使用相对路径
+      if (response.ok) {
+        const data = await response.json();
+        setName(data.name);
+      } else {
+        // API调用失败，使用模拟数据
+        console.log("API调用失败，使用模拟数据");
+        setName("模拟API数据 - GitHub Pages环境");
+      }
+    } catch (error) {
+      // 捕获网络错误，使用模拟数据
+      console.log("网络错误，使用模拟数据:", error);
+      setName("模拟API数据 - GitHub Pages环境");
+    }
+  };
 
   return (
-    <>
+    <React.Fragment>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -31,7 +58,7 @@ function App() {
           />
         </a>
       </div>
-      <h1>Vite + React + Hono + Cloudflare</h1>
+      <h1>Decoration Mind Map</h1>
       <div className="card">
         <button
           onClick={() => setCount((count) => count + 1)}
@@ -45,11 +72,7 @@ function App() {
       </div>
       <div className="card">
         <button
-          onClick={() => {
-            fetch("/api/")
-              .then((res) => res.json() as Promise<{ name: string }>)
-              .then((data) => setName(data.name));
-          }}
+          onClick={callApi}
           aria-label="get name"
         >
           Name from API is: {name}
@@ -59,8 +82,8 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">Click on the logos to learn more</p>
-    </>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
