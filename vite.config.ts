@@ -12,7 +12,7 @@ export default defineConfig({
   
   // 基础路径配置 - 用于GitHub Pages部署
   // 注意：如果仓库名不是decoration-mind-map，请修改为实际仓库名
-  base: '/decoration-mind-map/',
+  //base: '/decoration-mind-map/',
   
   // 构建配置
   //build: {
