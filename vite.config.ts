@@ -15,10 +15,10 @@ export default defineConfig({
   base: '/decoration-mind-map/',
   
   // 构建配置
-  build: {
-    // 输出目录
-    outDir: 'dist/client',
-    // 清空输出目录
-    emptyOutDir: true
-  }
+  //build: {
+  //  // 输出目录
+  //  outDir: 'dist/client',
+  //  // 清空输出目录
+  //  emptyOutDir: true
+  //}
 });
