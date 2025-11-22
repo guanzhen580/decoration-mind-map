@@ -50,9 +50,9 @@ jobs:
       
       - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
-        #with:
+        with:
           # 上传构建输出目录，根据项目配置指向dist/client
-          #path: './dist/client'
+          path: './dist'#/client'
       
       - name: 部署到GitHub Pages
         id: deployment
