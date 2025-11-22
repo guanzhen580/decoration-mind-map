@@ -52,8 +52,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # 上传构建输出目录，根据项目配置指向dist/client
-          path: './dist'#/client'
+          path: './dist'
       
       - name: 部署到GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        #uses: actions/deploy-pages@v4
+        run: npm run deploy
